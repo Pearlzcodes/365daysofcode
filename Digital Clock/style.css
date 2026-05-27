@@ -1,0 +1,67 @@
+body {
+    background-color: rgb(4, 4, 41);
+}
+
+.clockface{
+    font-family:  monospace;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    justify-self: center;
+    border-radius: 10px;
+    color: white;
+}
+
+
+@keyframes slideUp{
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+.hour, .minute, .seconds {
+    width: 80px;
+    background-color: hsl(220, 100%, 40%);
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+}
+
+.seconds {
+    background-color: rgb(255, 4, 130) ;
+   
+}
+
+.animate-slide{
+    animation: slideUp 0.3s ease-out forwards;
+}
+
+#hour, #minute, #seconds {
+    font-size: 70px;
+}
+
+.dark-light{
+    display: flex;
+    justify-content: center;
+   
+}
+
+#dark-light{
+    border: none;
+    padding: 5px 10px;
+    font-size: larger;
+    font-weight: bold;
+    margin: 20px;
+    color: rgb(4, 4, 41);
+}
+
+#date-time{
+    color: white;
+    text-align: center;
+}
