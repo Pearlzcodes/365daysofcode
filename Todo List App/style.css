@@ -1,0 +1,164 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    background-color: rebeccapurple;
+    padding: 10px;
+    color: aliceblue;
+}
+
+.addbtn {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    border: none;
+    font-size: 80px;
+    bottom: 40px;
+    right: 40px;
+    background: linear-gradient(45deg, rgb(48, 0, 97), rgb(67, 195, 255));
+    color: white;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.11);
+    z-index: 3000;
+}
+
+.addbtn:hover {
+    transform: scale(110%);
+}
+
+.addinput {
+display: flex;
+flex-direction: column;
+width: 300px;
+padding: 20px 0px;
+position: fixed;
+top: 25vh;
+left: 40vw;
+background-color: rebeccapurple;
+border: 1px solid rebeccapurple;
+z-index: 2000;
+animation: slideUp 0.5s ease-out forwards;
+
+}
+
+.addinput input {
+    background-color: white;
+    color: rebeccapurple;
+    margin: 10px 0px;
+    border: none;
+    padding: 10px;
+    font-size: large;
+}
+
+.addinput label {
+    color: white;
+    font-size: medium;
+    padding: 0px 10px;
+}
+
+
+
+#appendBtn {
+    color: rebeccapurple;
+    font-size: large;
+    font-weight: bold;
+    border: none;
+    background: white;
+    padding: 10px 0px;
+}
+
+#appendBtn:hover{
+    font-size: x-large;
+}
+
+#todoitem, .child-item {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(135, 207, 235, 0.397);
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
+}
+
+#todoitem input, .child-item input {
+    height: 30px;
+    width: 30px;
+    border: none;
+   
+}
+
+.tododetails {
+    width: 70%;
+    
+}
+
+.cover {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.575);
+    top: 0px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+.todotime {
+font-size: medium;
+color: rebeccapurple;
+margin: 5px 0;
+}
+
+#removeBtn {
+    font-size: large;
+}
+
+#error-catcher{
+    color: red;
+}
+
+
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1
+    }
+    
+}
+
+
+@media (max-width: 768px){
+    .addinput {
+        top: 10%;
+        left: 15%;
+        width: 250px;
+       
+    }
+
+    .addbtn{
+        transform: scale(50%);
+        right: 10px;
+        bottom: 10px;
+    }
+}

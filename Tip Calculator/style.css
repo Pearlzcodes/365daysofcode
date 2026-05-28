@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:rgb(41, 0, 65);
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: blue;
+    color:  white;
+    padding: 20px;
+    margin: 0px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.titleinput {
+    display: flex;
+    margin: 10px 0px;
+    width: 100%;
+    
+
+}
+
+.label {
+    background-color: rgb(177, 177, 177);
+    padding: 10px;
+    width: 40%;
+    text-align: center;
+
+}
+
+.userinput {
+    border: none;
+    border-bottom: 1px solid;
+    text-align: center;
+    width: 100%;
+}
+
+.divider {
+    border: 2px solid red;
+    width: 99%;
+}
+.useroutput {
+    background-color: rgb(57, 228, 134);
+     border: none;
+     text-align: center;
+     width: 100%;
+}
+
+.full-view
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 340px;
+    justify-self: center;
+    box-sizing: border-box;
+    background-color: white;
+    padding: 30px 0px;
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.13);
+
+
+}
+
