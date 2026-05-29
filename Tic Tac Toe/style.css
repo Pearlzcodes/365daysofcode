@@ -3,10 +3,11 @@
     height: 100px;
     background-color: antiquewhite;
     margin: 2px;
-    font-size: 50px;
+    font-size: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: cursive;
 }
 
 .box-container {
@@ -14,4 +15,30 @@
     grid-template-columns: auto auto auto;
     gap: 2px;
     width: 306px;
+    margin: auto;
+    
+}
+
+#displayscreen{
+    text-align: center;
+    font-size: xx-large;
+    margin: 10px;
+    
+}
+
+#reset-btn{
+    display: flex;
+    justify-self: center;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-size: large;
+    font-weight: bold;
+}
+
+select{
+    margin: auto;
+    display: flex;
+    margin-top: 10px;
+    padding: 5px 10px;
+    text-align: center;
 }
