@@ -1,0 +1,17 @@
+.boxes{
+    width: 100px;
+    height: 100px;
+    background-color: antiquewhite;
+    margin: 2px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 2px;
+    width: 306px;
+}

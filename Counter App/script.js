@@ -35,7 +35,7 @@ function resetCounter() {
 
 addBtn.addEventListener('click', addCounter);
 removeBtn.addEventListener('click', removeCounter);
-resetBtn.addEventListener('click', resetCounter)
+resetBtn.addEventListener('click', resetCounter);
 
 
 
