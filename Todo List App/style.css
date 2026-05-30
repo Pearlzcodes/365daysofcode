@@ -32,7 +32,7 @@ body {
 }
 
 .addinput {
-display: flex;
+display: none;
 flex-direction: column;
 width: 300px;
 padding: 20px 0px;

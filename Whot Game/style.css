@@ -1,0 +1,56 @@
+.game-container{
+    background-image: url("/Whot Game/whotDeck/bgImage.png");
+    width: 500px;
+    height: 500px;
+    position: relative;
+    background-size: cover;
+}
+
+#pick-card{
+    width: 100px;
+    position: absolute;
+    top: 150px;
+    right: 10px;
+
+}
+
+#played-card img{
+    position: absolute;
+    width: 100px;
+    left: 175px;
+    top: 175px;
+}
+
+#cards-left {
+    color: rgb(61, 51, 255);
+    position: absolute;
+    right: 40px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 170px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.5;
+}
+
+#player-cards {
+display: flex;
+position: absolute;
+bottom: 0px;
+}
+
+#player-cards img{
+    width: 100px;
+}
+
+#computer-cards {
+    display: flex;
+    position: absolute;
+    top: 0px;
+    }
+
+#computer-cards img{
+    width: 100px;
+}
