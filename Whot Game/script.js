@@ -6,7 +6,55 @@ const playerCards = document.getElementById('player-cards');
 const playerCard = document.getElementById('player-card');
 const computerCards = document.getElementById('computer-cards');
 const cardsLeft =  document.getElementById('cards-left');
+const pickSlide = document.getElementById('pick-slide');
+const playSlide = document.getElementById('play-slide');
+const prevBtn = document.getElementById('showprevbtn');
+    const nextBtn = document.getElementById('shownextbtn');
+    const cardsMore = document.getElementById('cards-more');
 
+let nextFactor = 0;
+let prevFactor = 0;
+let previousfactor;
+let playerCardQuantity = 0;
+
+nextBtn.addEventListener('click', () => {
+    let difference = playerCardQuantity - nextFactor;
+    if(difference > 5 && playerCardQuantity >= 5){
+        nextFactor += 1;
+        prevFactor -=1;
+        playerCards.style.left = `-${nextFactor * 100}px`;
+        
+        return nextFactor;
+    }
+  
+   })
+
+   prevBtn.addEventListener('click', () => {
+    let difference = playerCardQuantity - prevFactor;
+   
+        if(nextFactor > 0){
+            prevFactor += 1;
+            nextFactor -= 1;
+        playerCards.style.left = `${prevFactor * 100}px`;
+        }
+    
+    
+        
+    
+  
+   })
+
+
+
+
+
+let playerCardsArray = [];
+let playedCardsArray = [];
+let computerCardsArray = [];
+
+   
+
+   
 
 
 let gameStarted = false;
@@ -15,9 +63,7 @@ pickCard.addEventListener('click', handlePickOneCard);
 
 
 
-let playerCardsArray = [];
-let playedCardsArray = [];
-let computerCardsArray = [];
+
 
 function hadleComputersTurn(){
 
@@ -48,11 +94,31 @@ function displayComputerCard(){
 function handlePlayerPlay(event){
     const clickedIndex = parseInt(event.target.dataset.index);
     playedCardsArray.push(playerCardsArray[clickedIndex])
-    console.log(clickedIndex);
     playerCardsArray.splice(clickedIndex, 1);
     playerCards.innerHTML = "";
+    playSlide.innerHTML = `<img src="${playedCardsArray[playedCardsArray.length - 1][2]}" alt="">`
+    playSlide.classList.remove('play-slide');
+    void playSlide.offsetWidth;
+    playSlide.classList.add('play-slide');
+    playSlide.addEventListener('animationend', () => {
+        playSlide.innerHTML = '';
+    }, {once: true})
+    
+
     displayPlayerCard();
     displayPlayedCard();
+
+    playerCardQuantity -= 1;
+    cardsMore.textContent = `+${playerCardsArray.length - 5}`;
+
+
+
+    if(playerCardQuantity <= 5){
+        nextBtn.style.display = "none";
+        prevBtn.style.display = "none";
+        playerCards.style.left = '0px';
+        cardsMore.style.display = "none";
+    }
 
 }
 
@@ -68,7 +134,6 @@ let shuffledCards = shuffleCards(cardArray);
 playFirstCard();
 
 
-console.log(shuffledCards.length)
 
 function playFirstCard(){
     const randomIndex = Math.floor(Math.random() * shuffledCards.length);
@@ -89,11 +154,38 @@ function handlePickOneCard(){
     cardsLeft.textContent = shuffledCards.length;
 
     playerCards.innerHTML = "";
+
+    pickSlide.innerHTML = '<img src="whotDeck/whot-back.png" alt="">';
+    pickSlide.classList.remove('pick-slide');
+    void pickSlide.offsetWidth;
+    pickSlide.classList.add('pick-slide');
+    pickSlide.addEventListener('animationend', () => {
+        pickSlide.innerHTML = '';
+    }, {once: true})
     displayPlayerCard();
+    playerCardQuantity = playerCardsArray.length;
+   
+
+    if(playerCardQuantity > 5){
+        nextBtn.style.display = "block";
+        prevBtn.style.display = "block";
+        cardsMore.style.display = "block";
+        cardsMore.textContent = `+${playerCardsArray.length - 5}`
+        
+    }
+   
+    
+    
+   //setTimeout(displayPlayerCard, 2000);
 }
 
 function displayPlayerCard(){
+
+    playerCardsArray = shuffleCards(playerCardsArray);
+
     
+    
+
     for(let i = 0; i < playerCardsArray.length; i++){
         const newChild = document.createElement('img');
         newChild.id = 'player-card';
