@@ -38,7 +38,7 @@ function displayComputerCard(){
     for(let i = 0; i < computerCardsArray.length; i++){
         const newChild = document.createElement('img');
         newChild.id = 'player-card';
-        newChild.src = computerCardsArray[i][2];
+        newChild.src = '/Whot Game/whotDeck/whot-back.png';
         computerCards.appendChild(newChild);
         newChild.dataset.index = i;
         
