@@ -184,4 +184,16 @@ width: 500px;
     }
 }
 
+@media screen and (max-width:768px) {
+    body{
+        flex-direction: column;
+    }
+    
+    .dashboard{
+        flex-direction: row;
+        justify-content: space-around;
+        width: 500px;
+    }
+}
+
 
