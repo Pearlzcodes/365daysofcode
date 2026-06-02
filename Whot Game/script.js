@@ -222,7 +222,7 @@ function handlePlayerPlay(event){
 
             generalPrompt.textContent = 'Computer is thinking...';
             
-        setTimeout(() => {handleComputersTurn();}, Math.floor(Math.random() * 5000));
+        setTimeout(() => {handleComputersTurn();}, 3000);
         }
     else{
         generalPrompt.textContent = 'Number or shape must Match';
@@ -259,7 +259,7 @@ function playFirstCard(){
 function handlePickOneCard(){
     playerPickCard();
 
-    setTimeout(() => {handleComputersTurn();}, Math.floor(Math.random() * 5000));
+    setTimeout(() => {handleComputersTurn();}, 3000);
 }
 
 function displayPlayerCard(){
