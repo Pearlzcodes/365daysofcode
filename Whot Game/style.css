@@ -1,7 +1,14 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+}
+
+
+
 .game-container{
     background-image: url("whotDeck/bgImage.png");
     width: 500px;
-    height: 500px;
+    height: 520px;
     position: relative;
     background-size: cover;
     overflow: hidden;
@@ -12,6 +19,7 @@
     position: absolute;
     top: 150px;
     right: 10px;
+    
 
 }
 
@@ -90,9 +98,23 @@ width: 500px;
     animation: slideUp 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
 }
 
-.play-slide img {
+.play-slide img, #computer-play-slide img, .computer-pick-slide img {
     width: 100px;
 }
+
+.computer-play-slide{
+    position: absolute;
+    top:  34%;
+    left: 35%;
+    animation: computerPlay 0.2s ease-in-out forwards;
+}
+
+.computer-pick-slide{
+    position: absolute;
+    left: 35%;
+    animation: computerPick 0.2s ease-in-out forwards;
+}
+
 
 .pick-slide img {
     width: 100px;
@@ -111,6 +133,15 @@ width: 500px;
 #shownextbtn{
     right: 10px;
     
+}
+
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 150px;
+    background-color: bisque;
+    border: 1px solid black;
 }
 
 @keyframes pickAnimation {
@@ -132,3 +163,25 @@ width: 500px;
         transform: translateY(0%);
     }
 }
+
+@keyframes computerPlay {
+    from {
+        transform: translateY(-120%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes computerPick {
+    from {
+        transform: translateY(110%) translateX(200%);
+    }
+
+    to {
+        transform: translateY(0%) translateX(0%);
+    }
+}
+
+

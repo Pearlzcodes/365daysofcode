@@ -9,8 +9,12 @@ const cardsLeft =  document.getElementById('cards-left');
 const pickSlide = document.getElementById('pick-slide');
 const playSlide = document.getElementById('play-slide');
 const prevBtn = document.getElementById('showprevbtn');
-    const nextBtn = document.getElementById('shownextbtn');
-    const cardsMore = document.getElementById('cards-more');
+const nextBtn = document.getElementById('shownextbtn');
+const cardsMore = document.getElementById('cards-more');
+const generalPrompt = document.getElementById('general-prompt');
+const cardsCount = document.getElementById('cards-count');
+const computerPlaySlide = document.getElementById('computer-play-slide');
+const computerPickSlide = document.getElementById('computer-pick-slide');
 
 let nextFactor = 0;
 let prevFactor = 0;
@@ -51,11 +55,51 @@ nextBtn.addEventListener('click', () => {
 let playerCardsArray = [];
 let playedCardsArray = [];
 let computerCardsArray = [];
+let computerPlayableCards = []
+
+
+
+function playerPickCard(){
+    let randomIndex = Math.floor(Math.random() * shuffledCards.length);
+    playerCardsArray.push(shuffledCards[randomIndex])
+    shuffledCards.splice(randomIndex, 1);
+    cardsLeft.textContent = shuffledCards.length;
+
+    playerCards.innerHTML = "";
+
+    pickSlide.innerHTML = '<img src="whotDeck/whot-back.png" alt="">';
+    pickSlide.classList.remove('pick-slide');
+    void pickSlide.offsetWidth;
+    pickSlide.classList.add('pick-slide');
+    pickSlide.addEventListener('animationend', () => {
+        pickSlide.innerHTML = '';
+    }, {once: true})
+    displayPlayerCard();
+    showCardsLeft();
+    playerCardQuantity = playerCardsArray.length;
+   
+
+    if(playerCardQuantity > 5){
+        nextBtn.style.display = "block";
+        prevBtn.style.display = "block";
+        cardsMore.style.display = "block";
+        cardsMore.textContent = `+${playerCardsArray.length - 5}`;
+        
+    }
+
+    generalPrompt.textContent = 'Computer is thinking...';
+
+}
+
 
    
 
-   
 
+   
+function showCardsLeft(){
+    cardsCount.textContent = `Player: ${playerCardsArray.length} cards;
+                              Computer: ${computerCardsArray.length} cards`
+}
 
 let gameStarted = false;
 
@@ -63,9 +107,48 @@ pickCard.addEventListener('click', handlePickOneCard);
 
 
 
+function displayPlayedCard(){
+    playedCard.innerHTML = `<img src="${playedCardsArray[playedCardsArray.length - 1][2]}" alt="">`;
+}
+
+function handleComputersTurn(){
+    computerPlayableCards = [];
+    for(let i = 0; i < computerCardsArray.length; i++){
+        if(computerCardsArray[i][0] === playedCardsArray[playedCardsArray.length - 1][0]  ||  
+            computerCardsArray[i][1] === playedCardsArray[playedCardsArray.length - 1][1]){
+                computerPlayableCards.push(computerCardsArray[i]);
+            }
+    }
+
+    if(computerPlayableCards.length !== 0){
+        let playIndex = Math.floor(Math.random() * computerPlayableCards.length);
+        console.log(playIndex);
+        let chosenCard = computerPlayableCards[playIndex];
+        playedCardsArray.push(chosenCard);
+        computerPlaySlide.innerHTML = `<img src="${chosenCard[2]}" alt="">`
+           computerPlaySlide.classList.remove('computer-play-slide');
+            void computerPlaySlide.offsetWidth;
+            computerPlaySlide.classList.add('computer-play-slide');
+            computerPlaySlide.addEventListener('animationend', () => {
+                computerPlaySlide.innerHTML = '';
+            }, {once: true})
 
 
-function hadleComputersTurn(){
+        computerCardsArray = computerCardsArray.filter(card  =>{ 
+            return card !== chosenCard;
+        });
+
+       
+        displayComputerCard();
+        displayPlayedCard();
+        showCardsLeft();
+        generalPrompt.textContent = '';
+
+    }
+
+    else{
+        computerPicksOne();
+    }
 
 }
 
@@ -75,12 +158,25 @@ function computerPicksOne(){
     shuffledCards.splice(randomIndex, 1);
     cardsLeft.textContent = shuffledCards.length;
 
+    computerPickSlide.innerHTML = `<img src="whotDeck/whot-back.png" alt="">`
+    computerPickSlide.classList.remove('computer-pick-slide');
+     void computerPickSlide.offsetWidth;
+     computerPickSlide.classList.add('computer-pick-slide');
+     computerPickSlide.addEventListener('animationend', () => {
+         computerPickSlide.innerHTML = '';
+     }, {once: true})
+
+
     computerCards.innerHTML = "";
     displayComputerCard();
+    showCardsLeft();
+
+    generalPrompt.textContent = '';
 
 }
 
 function displayComputerCard(){
+    computerCards.innerHTML = "";
     for(let i = 0; i < computerCardsArray.length; i++){
         const newChild = document.createElement('img');
         newChild.id = 'player-card';
@@ -93,32 +189,45 @@ function displayComputerCard(){
 
 function handlePlayerPlay(event){
     const clickedIndex = parseInt(event.target.dataset.index);
-    playedCardsArray.push(playerCardsArray[clickedIndex])
-    playerCardsArray.splice(clickedIndex, 1);
-    playerCards.innerHTML = "";
-    playSlide.innerHTML = `<img src="${playedCardsArray[playedCardsArray.length - 1][2]}" alt="">`
-    playSlide.classList.remove('play-slide');
-    void playSlide.offsetWidth;
-    playSlide.classList.add('play-slide');
-    playSlide.addEventListener('animationend', () => {
-        playSlide.innerHTML = '';
-    }, {once: true})
-    
 
-    displayPlayerCard();
-    displayPlayedCard();
+    if(playedCardsArray[playedCardsArray.length - 1][0] === playerCardsArray[clickedIndex][0] || 
+        playedCardsArray[playedCardsArray.length - 1][1] === playerCardsArray[clickedIndex][1]){
+            playedCardsArray.push(playerCardsArray[clickedIndex])
+            playerCardsArray.splice(clickedIndex, 1);
+            playerCards.innerHTML = "";
+            playSlide.innerHTML = `<img src="${playedCardsArray[playedCardsArray.length - 1][2]}" alt="">`
+            playSlide.classList.remove('play-slide');
+            void playSlide.offsetWidth;
+            playSlide.classList.add('play-slide');
+            playSlide.addEventListener('animationend', () => {
+                playSlide.innerHTML = '';
+            }, {once: true})
+            
+        
+            displayPlayerCard();
+            displayPlayedCard();
+            showCardsLeft();
+        
+            playerCardQuantity -= 1;
+            cardsMore.textContent = `+${playerCardsArray.length - 5}`;
+        
+        
+        
+            if(playerCardQuantity <= 5){
+                nextBtn.style.display = "none";
+                prevBtn.style.display = "none";
+                playerCards.style.left = '0px';
+                cardsMore.style.display = "none";
+            } 
 
-    playerCardQuantity -= 1;
-    cardsMore.textContent = `+${playerCardsArray.length - 5}`;
-
-
-
-    if(playerCardQuantity <= 5){
-        nextBtn.style.display = "none";
-        prevBtn.style.display = "none";
-        playerCards.style.left = '0px';
-        cardsMore.style.display = "none";
+            generalPrompt.textContent = 'Computer is thinking...';
+            
+        setTimeout(() => {handleComputersTurn();}, Math.floor(Math.random() * 5000));
+        }
+    else{
+        generalPrompt.textContent = 'Number or shape must Match';
     }
+    
 
 }
 
@@ -143,40 +252,14 @@ function playFirstCard(){
     displayPlayedCard();
 
     for(let i = 1; i <= 5; i++){
-        handlePickOneCard();
+        playerPickCard();
         computerPicksOne();
     }
 }
 function handlePickOneCard(){
-    const randomIndex = Math.floor(Math.random() * shuffledCards.length);
-    playerCardsArray.push(shuffledCards[randomIndex])
-    shuffledCards.splice(randomIndex, 1);
-    cardsLeft.textContent = shuffledCards.length;
+    playerPickCard();
 
-    playerCards.innerHTML = "";
-
-    pickSlide.innerHTML = '<img src="whotDeck/whot-back.png" alt="">';
-    pickSlide.classList.remove('pick-slide');
-    void pickSlide.offsetWidth;
-    pickSlide.classList.add('pick-slide');
-    pickSlide.addEventListener('animationend', () => {
-        pickSlide.innerHTML = '';
-    }, {once: true})
-    displayPlayerCard();
-    playerCardQuantity = playerCardsArray.length;
-   
-
-    if(playerCardQuantity > 5){
-        nextBtn.style.display = "block";
-        prevBtn.style.display = "block";
-        cardsMore.style.display = "block";
-        cardsMore.textContent = `+${playerCardsArray.length - 5}`
-        
-    }
-   
-    
-    
-   //setTimeout(displayPlayerCard, 2000);
+    setTimeout(() => {handleComputersTurn();}, Math.floor(Math.random() * 5000));
 }
 
 function displayPlayerCard(){
@@ -197,6 +280,3 @@ function displayPlayerCard(){
     }
 }
 
-function displayPlayedCard(){
-    playedCard.innerHTML = `<img src="${playedCardsArray[playedCardsArray.length - 1][2]}" alt="">`;
-}
