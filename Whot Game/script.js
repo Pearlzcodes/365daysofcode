@@ -1,5 +1,15 @@
 import { cardArray } from "./data.js";
 
+function preloadAllCards(cardsArray){
+    cardsArray.forEach((cardData) => {
+        const imageUrl = cardData[2];
+        const img = new Image();
+        img.src = imageUrl;
+    });
+}
+
+preloadAllCards(cardArray);
+
 const playedCard = document.getElementById('played-card');
 const pickCard = document.getElementById('pick-card');
 const playerCards = document.getElementById('player-cards');
@@ -149,7 +159,7 @@ function handleComputersTurn(){
     else{
         computerPicksOne();
     }
-
+console.log(computerCardsArray);
 }
 
 function computerPicksOne(){
